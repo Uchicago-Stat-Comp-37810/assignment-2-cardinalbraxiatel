@@ -87,20 +87,9 @@ run_metropolis_MCMC <- function(startvalue, iterations){ #this function will upd
   
 }
 
-startvalue = c(4,0,10) #we now run a simulation, using these as our starting values
-chain = run_metropolis_MCMC(startvalue, 10000) #this runs the above function with appropriate
-# values
-
-burnIn = 5000 # the burn in period removes the first 5000 entries which are probably heavily
-#biased by the starting values
-acceptance = 1-mean(duplicated(chain[-(1:burnIn),])) #acceptance rate is 1 - mean of the number of 
-#duplicates
-
-
-
-
 
 ### Summary: #######################
+summary_plots <- function(burnIn, chain, y, x){
 
 par(mfrow = c(2,3)) #plots the below graphs in a 2x3 matrix of plots
 hist(chain[-(1:burnIn),1],nclass=30, , main="Posterior of a", xlab="True value = red line" )
@@ -142,4 +131,15 @@ abline(h = trueSd, col="red" ) #creates a line at the true value of sd
 
 # for comparison:
 summary(lm(y~x)) #prints summary of linear model of y dependent on x
+}
+startvalue = c(4,0,10) #we now run a simulation, using these as our starting values
+chain = run_metropolis_MCMC(startvalue, 10000) #this runs the above function with appropriate
+# values
+
+burnIn = 5000 # the burn in period removes the first 5000 entries which are probably heavily
+#biased by the starting values
+acceptance = 1-mean(duplicated(chain[-(1:burnIn),])) #acceptance rate is 1 - mean of the number of 
+#duplicates
+
+summary_plots(burnIn, chain, y, x)
 }
