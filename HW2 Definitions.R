@@ -97,7 +97,7 @@ summary_plots <- function(burnIn, chain, y, x){
   #without the burnIN
   abline(v = trueA, col="red" ) #creates a line at the true a value
   
-  hist(chain[-(1:burnIn),2],nclass=30, main="Posterior of b", xlab="True value = red line")
+ hist(chain[-(1:burnIn),2],nclass=30, main="Posterior of b", xlab="True value = red line")
   #the above line plots a histogram of the posterior of b, without the burnIn
   
   abline(v = mean(chain[-(1:burnIn),2])) #creates a line at the mean of the markov chain for b
