@@ -1,0 +1,68 @@
+---
+title: "HW2 Markdown"
+author: "Patrick Walker"
+date: "October 19, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r compare_outcomes}
+compare_outcomes <- function(iterations, burnIn){
+  
+  if(burnIn > iterations){return("burnIN can't be longer than iterations")}
+                            #the above line was added to prevent errors of non-finite length vectors
+  source(file = "C:\\Users\\Patrick's Computer\\Documents\\GitHub\\assignment-2-cardinalbraxiatel\\HW2.R") #Opens file of Metropolis function
+  
+  a_vals <- matrix(nrow = 10, ncol = 2) #a blank matrix in which to put the mean and sd of a
+  
+  for(i in 1:10){ #for loop for each of the iterations
+  a_int <- runif(1) #random number inserted for a
+  b_int <- runif(1) #random number inserted for b
+  sd_int <- runif(1) #random number inserted for sd
+  
+  startvalue <- c(a_int,b_int,sd_int) #feeds the above random numbers into startvalue
+  
+  chain_final = (Metropolis(iterations, burnIn )) #defines chain as the output of the Metropolis function
+  
+ #chain_final <- chain_final[-burnIn,] #I included this because I assume you don't want the burnIn
+  
+    mean_a <- mean(chain_final[,1]) #takes the mean of the first column of the chain 
+  std <- sd(chain_final[,1]) #takes the standard deviation of the first column of chain
+  a_vals[i,1] <- mean_a #stores mean_a in ith row 1st column of a_vals
+  a_vals[i,2] <- std #stores std in ith row 2nd colum of a_vals
+  print(a_vals[i,]) #prints ith row of a_vals
+  
+  }
+return(a_vals)
+}
+
+
+print("1000 iterations, 500 burnIn")
+  a_vals2 <- compare_outcomes(1000, 500)
+  avg_avg <- mean(a_vals2[,1])
+avg_std <- sqrt(mean((a_vals2[,2])^2)) 
+#print(a_vals2)
+paste("average of the averages", "average of the standard deviations")
+paste(avg_avg, avg_std)
+print("*****************************************************************")
+print("10000 iterations, 5000 burnIn")
+  a_vals2 <- compare_outcomes(10000, 5000)
+  avg_avg <- mean(a_vals2[,1])
+avg_std <- sqrt(mean((a_vals2[,2])^2)) 
+#print(a_vals2)
+paste("average of the averages", "average of the standard deviations")
+paste(avg_avg, avg_std)
+print("*****************************************************************")
+print("100000 iterations, 50000 burnIn")
+  a_vals2 <- compare_outcomes(100000, 50000)
+  avg_avg <- mean(a_vals2[,1])
+avg_std <- sqrt(mean((a_vals2[,2])^2)) 
+#print(a_vals2)
+paste("average of the averages", "average of the standard deviations")
+paste(avg_avg, avg_std)
+```
+
+I do not notice any particular changes in either the estimate or the standard deviation of a. I do notice that the histogram for a becomes more sharply peaked as well as the fact that the true estimate is bettered centered towards the middle of the plot of chain. This effect is observed as one transitions both between 1000 iterations with 500 burnIn to 10000 iterations with 5000 burnIn, as well as between the latter and 100000 with 50000 burnIn.

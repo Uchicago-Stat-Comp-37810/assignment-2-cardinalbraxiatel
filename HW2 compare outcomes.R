@@ -13,12 +13,12 @@ compare_outcomes <- function(iterations, burnIn){
   
   startvalue <- c(a_int,b_int,sd_int)
   
-  chain = (Metropolis(iterations, burnIn ))
+  chain_final = (Metropolis(iterations, burnIn ))
   
  
-  
-    mean_a <- mean(chain[,1])
-  std <- sd(chain[,1])
+  chain_final <- chain_final[-burnIn,]
+    mean_a <- mean(chain_final[,1])
+  std <- sd(chain_final[,1])
   a_vals[i,1] <- mean_a
   a_vals[i,2] <- std
   print(a_vals[i,])
