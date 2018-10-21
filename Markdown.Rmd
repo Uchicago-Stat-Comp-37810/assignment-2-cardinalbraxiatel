@@ -42,27 +42,16 @@ return(a_vals)
 
 print("1000 iterations, 500 burnIn")
   a_vals2 <- compare_outcomes(1000, 500)
-  avg_avg <- mean(a_vals2[,1])
-avg_std <- sqrt(mean((a_vals2[,2])^2)) 
-#print(a_vals2)
-paste("average of the averages", "average of the standard deviations")
-paste(avg_avg, avg_std)
+   
+
 print("*****************************************************************")
 print("10000 iterations, 5000 burnIn")
   a_vals2 <- compare_outcomes(10000, 5000)
-  avg_avg <- mean(a_vals2[,1])
-avg_std <- sqrt(mean((a_vals2[,2])^2)) 
-#print(a_vals2)
-paste("average of the averages", "average of the standard deviations")
-paste(avg_avg, avg_std)
+ 
 print("*****************************************************************")
 print("100000 iterations, 50000 burnIn")
   a_vals2 <- compare_outcomes(100000, 50000)
-  avg_avg <- mean(a_vals2[,1])
-avg_std <- sqrt(mean((a_vals2[,2])^2)) 
-#print(a_vals2)
-paste("average of the averages", "average of the standard deviations")
-paste(avg_avg, avg_std)
+  
 ```
 
-I do not notice any particular changes in either the estimate or the standard deviation of a. I do notice that the histogram for a becomes more sharply peaked as well as the fact that the true estimate is bettered centered towards the middle of the plot of chain. This effect is observed as one transitions both between 1000 iterations with 500 burnIn to 10000 iterations with 5000 burnIn, as well as between the latter and 100000 with 50000 burnIn.
+The value of a predicted by the iterations doesn't converge to the true value but does appear to converge to the Least Squares model with increasing iterations. I do notice that the histogram for a becomes more sharply peaked as well as the fact that the true estimate is bettered centered towards the middle of the plot of chain. This effect is observed as one transitions both between 1000 iterations with 500 burnIn to 10000 iterations with 5000 burnIn, as well as between the latter and 100000 with 50000 burnIn.

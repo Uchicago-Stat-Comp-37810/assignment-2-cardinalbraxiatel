@@ -129,5 +129,5 @@ summary_plots <- function(burnIn, chain, y, x){
   abline(h = trueSd, col="red" ) #creates a line at the true value of sd
   
   # for comparison:
-  summary(lm(y~x)) #prints summary of linear model of y dependent on x
+  print(summary(lm(y~x))) #prints summary of linear model of y dependent on x
 }
