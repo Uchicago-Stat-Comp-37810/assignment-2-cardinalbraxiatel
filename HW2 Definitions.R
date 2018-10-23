@@ -131,3 +131,8 @@ summary_plots <- function(burnIn, chain, y, x){
   # for comparison:
   print(summary(lm(y~x))) #prints summary of linear model of y dependent on x
 }
+
+plot(x,y, main="Test Data") #plots x and y to establish linear relations
+slopevalues <- function(x){return(likelihood(c(x, trueB, trueSd)))} #shows a plot of the log liklihood functions to explain why we use log likelihood
+slopelikelihoods <- lapply(seq(3, 7, by=.05), slopevalues )
+plot (seq(3, 7, by=.05), slopelikelihoods , type="l", xlab = "values of slope parameter a", ylab = "Log likelihood")

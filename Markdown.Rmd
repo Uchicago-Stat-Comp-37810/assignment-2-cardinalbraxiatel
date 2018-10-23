@@ -9,12 +9,15 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+The value of a predicted by the iterations doesn't converge to the true value but does appear to converge to the Least Squares model with increasing iterations. I do notice that the histogram for a becomes more sharply peaked as well as the fact that the true estimate is bettered centered towards the middle of the plot of chain. This effect is observed as one transitions both between 1000 iterations with 500 burnIn to 10000 iterations with 5000 burnIn, as well as between the latter and 100000 with 50000 burnIn. With higher numbers of iterations we see the values predicted by the Metropolis Hastings begin to converge to those of the standard linear distribution.
+
+
 ```{r compare_outcomes}
 compare_outcomes <- function(iterations, burnIn){
   
   if(burnIn > iterations){return("burnIN can't be longer than iterations")}
                             #the above line was added to prevent errors of non-finite length vectors
-  source(file = "C:\\Users\\Patrick's Computer\\Documents\\GitHub\\assignment-2-cardinalbraxiatel\\HW2.R") #Opens file of Metropolis function
+  source(file = "C:\\Users\\Patrick's Computer\\Documents\\GitHub\\assignment-2-cardinalbraxiatel\\HW2 part 4.R") #Opens file of Metropolis function
   
   a_vals <- matrix(nrow = 10, ncol = 2) #a blank matrix in which to put the mean and sd of a
   
@@ -33,25 +36,39 @@ compare_outcomes <- function(iterations, burnIn){
   std <- sd(chain_final[,1]) #takes the standard deviation of the first column of chain
   a_vals[i,1] <- mean_a #stores mean_a in ith row 1st column of a_vals
   a_vals[i,2] <- std #stores std in ith row 2nd colum of a_vals
+  
+  
   print(a_vals[i,]) #prints ith row of a_vals
   
   }
+  
+  
+ 
 return(a_vals)
 }
 
 
 print("1000 iterations, 500 burnIn")
   a_vals2 <- compare_outcomes(1000, 500)
-   
+   names <- c("slope 1000", "intercept 1000")
+  final <- rbind(names,a_vals2)
 
 print("*****************************************************************")
 print("10000 iterations, 5000 burnIn")
   a_vals2 <- compare_outcomes(10000, 5000)
+  names2 <- c("slope 10000", "intercept 10000")
+  final2 <- rbind(names2,a_vals2)
+
  
 print("*****************************************************************")
 print("100000 iterations, 50000 burnIn")
   a_vals2 <- compare_outcomes(100000, 50000)
+names3 <- c("slope 100000", "intercept 100000")
+  final3 <- rbind(names3,a_vals2)
   
+print(final)
+print(final2)
+print(final3)
 ```
 
-The value of a predicted by the iterations doesn't converge to the true value but does appear to converge to the Least Squares model with increasing iterations. I do notice that the histogram for a becomes more sharply peaked as well as the fact that the true estimate is bettered centered towards the middle of the plot of chain. This effect is observed as one transitions both between 1000 iterations with 500 burnIn to 10000 iterations with 5000 burnIn, as well as between the latter and 100000 with 50000 burnIn.
+The value of a predicted by the iterations doesn't converge to the true value but does appear to converge to the Least Squares model with increasing iterations. I do notice that the histogram for a becomes more sharply peaked as well as the fact that the true estimate is bettered centered towards the middle of the plot of chain. This effect is observed as one transitions both between 1000 iterations with 500 burnIn to 10000 iterations with 5000 burnIn, as well as between the latter and 100000 with 50000 burnIn. With higher numbers of iterations we see the values predicted by the Metropolis Hastings begin to converge to those of the standard linear distribution.
